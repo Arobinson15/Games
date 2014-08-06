@@ -1,0 +1,131 @@
+//text based adventure game
+//timeticker
+//computer logic
+//.html browser 
+
+
+<!DOCTYPE html>
+
+<title>Adventure Game</title>
+
+<body>
+<script>
+var slaying = true;
+
+var youHit = Math.floor(Math.random() * 2);
+
+var damageThisRound = Math.floor(Math.random()*5+1);
+
+var totalDamage = 0;
+
+var user = prompt("You find yourself in  jungle land when you come across a dense river of tar what do you do? JUMP ACROSS ,GO AROUND, TURN BACK ?").toUpperCase();
+
+switch(user){
+    case 'JUMP ACROSS':
+         if(user == 'JUMP ACROSS' && true){ var choice = prompt("You jump! as far as you can but you should have made a running start. You land short of the near side of the toxic tar and are already waist deep and stuck.Find a way out! TREE ROOT,  CALL HELP ?").toUpperCase();}
+         if(choice == 'TREE ROOT'){
+             var action = prompt("Luckily there is an exposed root from a large tree that can be used as leverage to pull yourself out from the toxic river of tar! do you,  CONTINUE, TURN BACK, CALL HELP ?");
+             
+            }
+
+			else if(choice == 'CALL HELP'){
+    alert("After hours and hours a rescue team lifts you to safety and fly off into the sunset when a dragon comes and destroys the rotors, when it crashes and once again stranded in the jungle ", "To be continued..");
+	}else{alert("Adventure awaits..1"); }
+             
+			 if(action == 'CONTINUE' && true){
+                  prompt("A brave action leads you forward and into a loud mausoleum where you find a bag of gold and a path that leads to a great  waterfall ", "You Win!");
+                 }else if(action == 'TURN BACK'){
+                   var fight =  prompt("As you turn away from this challenge and head back toward the place you escaped from before,You approach a cave dark and wet with sunlight piercing through it's walls . A sleeping giant type-- ENTER  ").toUpperCase();
+                 
+                       
+				 
+                if(fight == 'ENTER' ){ prompt("As you pass into the cave a winged giant awakens and takes flight out from the ceiling of the cave and boulders come crashing down crushing sealing the cave in  ","Game over!");
+				
+				
+                   
+                                     } 
+                   else{alert("Adventure awaits.."); }
+                    
+                  if(action == 'CALL HELP'){
+                   alert("After hours and hours a rescue team lifts you to safety and fly off into the sunset when a dragon comes and destroys the rotors, when it crashes and once again stranded in the jungle ", "To be continued..");}
+				   else{
+             
+             while(slaying){
+
+if(youHit){
+        
+
+console.log("You made a hit on the dragon!");
+    
+	totalDamage += damageThisRound;
+        
+ if(totalDamage >= 4){
+            
+	console.log("You have successfully slayed this dragon!");
+            
+  slaying = false;
+ 
+	}else {
+
+          youHit = Math.floor(Math.random() * 2);
+  }}
+        
+	else{
+            
+		console.log("You were defeated by the dragon!");
+        
+       
+		 slaying = false;
+        }
+    
+}
+
+}}
+ break;       
+case 'GO AROUND':
+            if(user == 'GO AROUND' || true){var choice2 = prompt("It may take all-day but it was smart to take a walk around the tar river, when you meet an old merchant dwarf  sitting on a stump smoking a pipe with greedy eyes set on your wallet. What should you do? TURN BACK , IGNORE, TALK ?").toUpperCase();}
+            if(choice2 == 'IGNORE'){prompt("The dwarf is mad and hits you with a crossbow shot,you take an arrow to the knee an can no longer continue..","Game Over!" );}else if(choice2 == 'TALK'){
+                prompt("The dwarf gives you some helpful advice !","Find the mausoleum!");}
+            break;
+            case 'TURN BACK':
+                var choice3 = prompt("As you turn away from this challenge and head back toward the place you escaped from before,You approach a cave dark and wet with sunlight piercing through it's walls .A dragon to fight! type-- ENTER  ").toUpperCase();
+                if(choice3 == 'ENTER'){
+                    
+                    while(slaying){
+
+if(youHit){
+        
+
+document.write("You made a hit on the dragon!");
+    
+	totalDamage += damageThisRound;
+	document.write(totalDamage);
+        
+ if(totalDamage >= 4){
+            
+	document.write(alert("You have successfully slayed this dragon!"));
+            
+  slaying = false;
+ 
+	}else {
+
+          youHit = Math.floor(Math.random() * 2);
+  }}
+        
+	else{
+            
+		document.write(alert("You were defeated by the dragon!"));
+        
+       
+		 slaying = false;
+  }
+    
+}
+     }
+                break;
+        default:
+        alert(" Adventure awaits ** ");
+}
+</script>
+</body>
+</html>
