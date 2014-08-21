@@ -1,0 +1,120 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Number guessing game</title>
+<link rel="stylesheet" href="css/style1.css">
+<body>
+<p id="output"> Play a number between 1 and 100 to play .</p>
+<input id="input" type="number" placeholder="Enter your number.."autofocus>
+<button class = "uI" id="press">play</button>
+<div id="stage">
+<div id="scale"></div>
+<div id="arrow"></div>
+</div>
+</body>
+<script type="text/javascript">
+
+//Game variables
+var unKnownNumber = Math.round(Math.random() * 100 + 1);
+var playerNumber = 0;
+var numberRemaining=10;
+var numberMade = 0;
+var gameState = "";
+gameWon = false;
+
+//The input and output fields
+var input = document.querySelector("#input");
+var output = document.querySelector("#output");
+
+//The button
+var button = document.querySelector("button");
+button.style.cursor = "pointer";
+button.addEventListener("click",clickHandler,false);
+
+window.addEventListener("keydown" , keydownHandler,false);
+
+//The pointer
+//It needs this reference so that the code can 
+//change the arrow’s position with CSS
+var arrow = document.querySelector("#arrow");
+
+function render(){
+	//Position draw the arrow
+	//Multiply the players number to get the
+	//correct pixel position on the scale
+	arrow.style.left = playerNumber *3-3 + "px";
+}
+function keydownHandler(event){
+	if(event.keyCode === 13){
+	 validateInput();
+	}
+}
+function clickHandler()
+{
+	validateInput();
+	//playGame();
+}
+//Add the new validate input function just below the clickHandler:
+function validateInput(){
+	playerNumber = parseInt(input.value);
+	if(isNaN(playerNumber)){
+		output.innerHTML = "Please enter a number.";
+	}else{
+		playGame();
+	}
+}
+function playGame()
+{
+	numberRemaining = numberRemaining -1;
+	numberMade = numberMade + 1;
+	gameState = " Guess: " + numberMade + " Remaining " + numberRemaining;
+	
+	
+	//Check for the end of game
+	if(playerNumber === unKnownNumber){
+	
+		gameWon = true;
+		endGame();
+	}
+	 //Update the graphic display
+	 render();
+	 
+	
+	if(playerNumber > unKnownNumber){
+		output.innerHTML = "Too high!" + gameState; //to display the complete message in the output element
+	}
+	//Check for the end of game
+	if( numberRemaining < 1){
+		endGame();
+	}
+	else if(playerNumber < unKnownNumber){
+		output.innerHTML = "Too low!" + gameState;
+	}
+	//Check for the end of the computer game
+	if(numberRemaining < 1){
+		endGame();
+	}
+	
+	
+	function endGame(){
+		if(gameWon){
+		 output.innerHTML
+		  = "Yes,it's " + unKnownNumber + "!" + "</br>"
+		  + "It only took you " + numberMade + " guesses.";
+		}
+		else{
+		 output.innerHTML
+		  ="No more guesses left!" + "</br>"
+		  + "It only took you " + numberMade + ".";
+		}
+	
+	//Disable the button
+	button.removeEventListener("click",clickHandler,false);
+	button.disabled = true;
+	
+	//Disable the enter key
+	window.removeEventListener("keydown",keydownHandler,false);
+	
+	//Disable the input field
+	input.disabled = true;
+}}
+</script>
