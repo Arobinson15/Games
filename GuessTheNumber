@@ -1,3 +1,75 @@
+/*
+This is the style sheet for the guessTheNumber computer game .
+I placed the file above the html file because sometimes a
+repository can become clustered and it's difficult to find the 
+proper files . 
+*/
+
+<!----------style1.css---->
+#press
+{
+	font-family: Arial, Helvetica, sans-serif;
+font-size: 14px;
+color: #fff;
+padding: 10px 20px;
+border: 2px solid #000;
+cursor: pointer;
+
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+
+background:-webkit-linear-gradient(top, #a3a3a3, #000);
+background:-moz-linear-gradient(top, #a3a3a3, #000);
+background: linear-gradient(top, #a3a3a3, #000);
+
+
+-webkit-box-shadow: 5px 5px 3px rgba(0,0,0,0.5);
+-moz-box-shadow: 5px 5px 3px rgba(0,0,0,0.5);
+box-shadow: 5px 5px 3px rgba(0,0,0,0.5);
+
+-webkit-user-select: none;
+-moz-user-select: none;
+user-select: none;
+}
+#stage
+{
+ width: 300px;
+ height: 33px;
+ position: relative;
+}
+
+#scale
+{
+width: 300px;
+height: 33px;
+position: absolute;
+top: 0px;
+left: 0px;
+background-image: url(../images/scale.png);
+}
+
+#arrow
+{
+width: 17px;
+height: 22px;
+position: absolute;
+top: 0px;
+left: 0px;
+background-image: url(../images/arrow.png);
+<!-----/*Transition*/--->
+-webkit-transition: left 0.5s ease-out 0s;
+-moz-transition: left 0.5s ease-out 0s;
+transition: left 0.5s ease-out 0s;
+}
+
+
+
+
+
+
+
+//-------------------------------------------------------------------------------++++
 <!doctype html>
 <meta charset="utf-8">
 <title>Number guessing game</title>
