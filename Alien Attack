@@ -1,0 +1,325 @@
+
+#stage
+{
+ width: 300px;
+ height: 300px;
+ position: relative;
+}
+
+#background
+{
+ width: 300px;
+ height: 300px;
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ background-image:url(../images/background.png);
+}
+
+#cannon
+{
+ width: 20px;
+ height: 20px;
+ position: absolute;
+ top: 270px;
+ left: 140px;
+ background-image: url(../images/cannon.png);
+ 
+ -webkit-transition: left 0.5s ease-out 0s;
+-moz-transition: left 0.5s ease-out 0s;
+transition: left 0.15s ease-out 0s; 
+}
+#alien
+{
+ width:20px;
+ height:20px;
+ position: absolute;
+ top: 20px;
+ left: 80px;
+ display:block;
+ background-image: url(../images/alien.png);
+}
+
+
+
+
+#missile
+{
+ width: 10px;
+ height: 10px;
+ position: absolute;
+ top: 240px;
+ left: 145px;
+ display: block;
+ background-image: url(../images/missile.png);
+ 
+-webkit-transition: top 0.5s ease-out 0s;
+-moz-transition: top 0.5s ease-out 0s;
+transition: top 0.5s ease-out 0s; 
+
+-webkit-transition: left 0.5s ease-out 0s;
+-moz-transition: left 0.5s ease-out 0s;
+transition: left 0.5s ease-out 0s; 
+}
+
+#explosion
+{
+ width:20px;
+ height:20px;
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ display:none;
+ background-image: url(../images/explosion.png);
+ 
+}
+
+#press
+{
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+font-size: 14px;
+color: #fff;
+padding: 4px 10px ;
+border: 1px double DodgerBlue;
+cursor: pointer;
+margin: 0px auto;
+text-align: center;
+
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+
+background:-webkit-linear-gradient(top, #a3a3a3, #000);
+background:-moz-linear-gradient(top, #a3a3a3, #000);
+background: linear-gradient(top, #a3a3a3, #000);
+
+
+-webkit-box-shadow: 5px 5px 3px rgba(0,0,0,0.5);
+-moz-box-shadow: 5px 5px 3px rgba(0,0,0,0.5);
+box-shadow: 5px 5px 3px rgba(0,0,0,0.5);
+
+-webkit-user-select: none;
+-moz-user-select: none;
+user-select: none;
+}
+
+*
+{
+ 
+ font-family: "Arial Black", Gadget, sans-serif;
+}
+
+#game
+{
+
+margin: 0px auto;
+width: 330px;
+height: auto;
+padding: 8px 10px 8px 10px;
+border: DodgerBlue;
+background-color: PaleGoldenRod;
+background: linear-gradient(top, #588063, #fff);
+box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+border-radius: 10px;
+}
+
+#h1
+{
+-webkit-text-stroke: 1px #000;
+-moz-text-stroke: 1px #000;
+text-stroke: 1px #000;
+text-shadow: 1px 3px DodgerBlue;
+}
+
+#output
+{
+ 
+}
+
+
+<!----Attempt to destroy the Alien before it invades the earth!-->
+<!----The game has been lost when you have no more missiles--->
+<!doctype html>
+<meta charset="utf-8">
+<title>Alien Attack</title>
+<link rel="stylesheet" href="AlienAttackStyle.css">
+
+<section id="game">
+<h1 id="h1"> Computer Games </h1>
+
+<div id="stage">
+	<div id="background"></div>
+	<div id="cannon"></div>
+	<div id="missile"></div>
+	<div id="alien"></div>	
+	<div id="explosion"></div>
+</div>
+
+<p id="output">Enter the X and Y position(0-300),then click fire.</p>
+<input id="inputX" type="text" placeholder="X..."autofocus>
+<input id="inputY" type ="text" placeholder="Y...">
+<button id="press">fire!</button>
+
+</section>
+
+<script>
+//Game variables
+var alienX = Math.round(Math.random()* 280);
+var alienY = 20;
+var guessX = 0;
+var guessY = 0;
+var shotsRemaining = 8;
+var shotsMade = 0;
+var gameState = "";
+var gameWon = false;
+
+//The game objects
+var cannon = document.querySelector("#cannon");
+var alien = document.querySelector("#alien");
+var missile = document.querySelector("#missile");
+var explosion = document.querySelector("#explosion");
+
+//The input and output fields
+var inputX = document.querySelector("#inputX");
+var inputY = document.querySelector("#inputY");
+var output = document.querySelector("#output");
+
+//The button
+var button = document.querySelector("button");
+button.style.cursor = "pointer";
+button.addEventListener("click",clickHandler, false);
+
+window.addEventListener("keydown" , keydownHandler,false);
+
+function render(){
+	 //Position the alien
+	 //This code is changing the alien’s CSS position 
+	 //values to actually move it to a real new position
+	 //in the browser:
+	 alien.style.left = alienX + "px";
+	 alien.style.top = alienY + "px";
+	 
+	 //Position the cannon
+	 //The cannon is moved to the guessX pos:
+	 cannon.style.left = guessX + "px";
+	 
+	 //Position the missile
+	 //And the missile is moved to the
+	 //precise X and Y positions the player guessed:
+	 missile.style.left = guessX + "px";
+	 missile.style.top = guessY  + "px";
+	 
+	 
+	 if(gameWon){
+	 //Display the explosion
+		explosion.style.display = "block";
+		explosion.style.left = alienX + "px";
+		explosion.style.top = alienY + "px";
+		
+		//Hide the alien
+		alien.style.display = "none";
+		
+		//Hide the missile
+		missile.style.display = "none";
+	 }
+	}
+	function keydownHandler(event){
+	if(event.keyCode === 13){
+	 validateInput();
+	}
+}
+	
+	function clickHandler(){
+		//playGame();
+		validateInput();
+	}
+ function validateInput()
+	{
+		guessX = parseInt(inputX.value);
+		guessY = parseInt(inputY.value);
+	if(isNaN(guessX) || isNaN(guessY))
+		{
+		output.innerHTML = "Please enter a number.";
+	}
+	else if(guessX > 300 || guessY > 300)
+	{
+	output.innerHTML = "Please enter a number less than 300.";
+	}
+	else
+	{
+		playGame();
+	}
+ }	
+	
+
+function playGame(){
+//first calculates shotsRemaining and shotsMade:
+	shotsRemaining--;
+	shotsMade++;
+	gameState = " Shots " + shotsMade + ", Remaining: " + shotsRemaining;
+	
+	//values from the text fields into these variables:
+	guessX = parseInt(inputX.value);
+	guessY = parseInt(inputY.value);
+	
+	//if the alien has been hit:
+	if(guessX >= alienX && guessX <= alienX +20){
+	
+	 //Yes, it's within the X range,
+	 //so now check the Y range
+	if(guessY >= alienY && guessY <= alienY +20){
+	 //It's in both the X and Y range,so it's a hit!
+		
+		gameWon = true;
+		explosion.style.top = alienY + "px";
+		endGame();
+		
+     }
+	 
+	}
+	else{
+		output.innerHTML = "Miss!" + gameState;
+		
+		//Check for the end of the game
+		if(shotsRemaining < 1){
+			endGame();
+		}
+	}
+	//Update the alien's position if the 
+	//game hasn't been won
+	if(!gameWon){
+	//Update the alien's X position:
+	 alienX = Math.round(Math.random() * 280);
+	
+	//Add 30 to the new Y position so that
+	//the alien moves down toward earth:
+	alienY+=30;
+	 
+	}
+	//render the new game state
+	render();
+	console.log("X: " + alienX);
+	console.log("Y: " + alienY);
+	}
+	
+	function endGame(){
+	
+	 if(gameWon){
+	 
+	  output.innerHTML = " Hit! You saved the earth! " + "</br>"
+	  + " It only took you " + shotsMade + " shots.";
+	 }
+	 else{
+	 output.innerHTML = "You lost!" + "</br>"
+	 + " The earth has been invaded! ";
+	 }
+	 //Disable the button
+	button.removeEventListener("click",clickHandler,false);
+	button.disabled = true;
+	
+	//Disable the enter key
+	window.removeEventListener("keydown",keydownHandler,false);
+	
+	//Disable the input field
+	//input.disabled = true;
+	}
