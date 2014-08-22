@@ -1,0 +1,136 @@
+#stage
+{
+ width: 300px;
+ height: 300px;
+ position: relative;
+}
+
+#background
+{
+ width: 300px;
+ height: 300px;
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ background-image:url(../images/background.png);
+}
+
+#cannon
+{
+ width: 20px;
+ height: 20px;
+ position: absolute;
+ top: 270px;
+ left: 140px;
+ background-image: url(../images/cannon.png);
+ 
+ -webkit-transition: left 0.5s ease-out 0s;
+-moz-transition: left 0.5s ease-out 0s;
+transition: left 0.15s ease-out 0s; 
+}
+#alien
+{
+ width:20px;
+ height:20px;
+ position: absolute;
+ top: 20px;
+ left: 80px;
+ display:block;
+ background-image: url(../images/alien.png);
+}
+
+
+
+
+#missile
+{
+ width: 10px;
+ height: 10px;
+ position: absolute;
+ top: 240px;
+ left: 145px;
+ display: block;
+ background-image: url(../images/missile.png);
+ 
+-webkit-transition: top 0.5s ease-out 0s;
+-moz-transition: top 0.5s ease-out 0s;
+transition: top 0.5s ease-out 0s; 
+
+-webkit-transition: left 0.5s ease-out 0s;
+-moz-transition: left 0.5s ease-out 0s;
+transition: left 0.5s ease-out 0s; 
+}
+
+#explosion
+{
+ width:20px;
+ height:20px;
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ display:none;
+ background-image: url(../images/explosion.png);
+ 
+}
+
+#press
+{
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+font-size: 14px;
+color: #fff;
+padding: 4px 10px ;
+border: 1px double DodgerBlue;
+cursor: pointer;
+margin: 0px auto;
+text-align: center;
+
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+
+background:-webkit-linear-gradient(top, #a3a3a3, #000);
+background:-moz-linear-gradient(top, #a3a3a3, #000);
+background: linear-gradient(top, #a3a3a3, #000);
+
+
+-webkit-box-shadow: 5px 5px 3px rgba(0,0,0,0.5);
+-moz-box-shadow: 5px 5px 3px rgba(0,0,0,0.5);
+box-shadow: 5px 5px 3px rgba(0,0,0,0.5);
+
+-webkit-user-select: none;
+-moz-user-select: none;
+user-select: none;
+}
+
+*
+{
+ 
+ font-family: "Arial Black", Gadget, sans-serif;
+}
+
+#game
+{
+
+margin: 0px auto;
+width: 330px;
+height: auto;
+padding: 8px 10px 8px 10px;
+border: DodgerBlue;
+background-color: PaleGoldenRod;
+background: linear-gradient(top, #588063, #fff);
+box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+border-radius: 10px;
+}
+
+#h1
+{
+-webkit-text-stroke: 1px #000;
+-moz-text-stroke: 1px #000;
+text-stroke: 1px #000;
+text-shadow: 1px 3px DodgerBlue;
+}
+
+#output
+{
+ 
+}
