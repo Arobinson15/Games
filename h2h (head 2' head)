@@ -41,10 +41,6 @@ var warriorState = "";
 var battlemageState = "";
 var projectilePosX = 250;
 var projectilePosY = 100;
-var battlemageProjectileX = 0;
-var battlemageProjectileY = 0;
-var warriorAttackX = 0;
-var warriorAttackY = 0;
 var battlemageAttack = false;
 var warriorDmg = false;
 var gameWon = false;
@@ -90,8 +86,8 @@ function render(){
 	sword.style.top = warriorSwordY + "px";
 	
 	//Position the projectile
-	projectile.style.left =  projectilePosX + "px";//battlemageProjectileX + "px"; //sit an equal pos until later
-	projectile.style.top = projectilePosY + "px";//battlemageProjectileY + "px";
+	projectile.style.left =  projectilePosX + "px";
+	projectile.style.top = projectilePosY + "px";
 	sword.style.left = warriorSwordX + "px";
 	sword.style.top = warriorSwordY + "px";
 	
