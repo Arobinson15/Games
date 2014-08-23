@@ -1,0 +1,223 @@
+//This computer game was made from scratch using tools that i've learned 
+//It's like a card battler . Your dice roll submits random numbers for the 
+//the characters attack patterns including damage dealing . And interactivity 
+//with cool graphics .
+
+<!doctype html>
+<title>h2h</title>
+<link rel="stylesheet" href="h2hStyle.css">
+<section id="game">
+<h1 id="h1"> Computer Games </h1>
+<div id="stage">
+	<div id="background"></div>
+	<div id="battlemage"></div>
+	<div id="warrior"></div>
+	<div id="projectile"></div>
+	<div id="explosion"></div>
+	<div id="sword"></div>
+	
+	
+	
+	</div>
+	
+	<div id="dl1" >0</div>
+<div id="dl2" >0</div>
+<button onclick="clickHandler()" id="button" >Roll Dice1</button>
+<button onclick="clickHandler2()" id="button2" >Roll Dice2</button>
+<h2 id="status" ></h2>
+	
+	<p id="output">  battle </p>
+	<p id="output2">  battle </p>
+	
+</section>
+	
+<script>
+//Game variables
+var warriorSwordX = 530;
+var warriorSwordY = 100;
+var warriorHealth = 140;
+var battlemageHealth = 120;
+var warriorState = "";
+var battlemageState = "";
+var projectilePosX = 250;
+var projectilePosY = 100;
+var battlemageProjectileX = 0;
+var battlemageProjectileY = 0;
+var warriorAttackX = 0;
+var warriorAttackY = 0;
+var battlemageAttack = false;
+var warriorDmg = false;
+var gameWon = false;
+
+//Dice globals
+var d1=Math.round(Math.random()*5)+0; 
+var d2=Math.round(Math.random()*5)+1;
+var diceTotal = d1+d2;
+
+//The game objects
+var battlemage = document.querySelector("#battlemage");
+var warrior = document.querySelector("#warrior");
+var projectile = document.querySelector("#projectile");
+var explosion = document.querySelector("#explosion");
+var sword = document.querySelector("#sword");
+
+//The dice objects
+var dice1=document.querySelector("dl1");    
+var dice2=document.querySelector("dl2");
+
+
+//The buttons
+var button = document.querySelector("#button");
+button.style.cursor = "pointer";
+button.addEventListener("click",clickHandler,false);
+
+var button2 = document.querySelector("#button2");
+button2.style.cursor = "pointer";
+button2.addEventListener("click",clickHandler2,false);
+
+
+//output fields
+
+var output = document.querySelector("#output");
+var output2 = document.querySelector("#output2");
+
+//Dice status field
+var status=document.querySelector("#status");
+
+function render(){
+	//Position the sword
+	sword.style.left = warriorSwordX + "px";
+	sword.style.top = warriorSwordY + "px";
+	
+	//Position the projectile
+	projectile.style.left =  projectilePosX + "px";//battlemageProjectileX + "px"; //sit an equal pos until later
+	projectile.style.top = projectilePosY + "px";//battlemageProjectileY + "px";
+	sword.style.left = warriorSwordX + "px";
+	sword.style.top = warriorSwordY + "px";
+	
+	if(battlemageAttack){
+	
+	 //Display the explosion
+	 explosion.style.display = "block";
+	 explosion.style.left = warriorSwordX + "px";
+	 explosion.style.top = warriorSwordY + "px";
+	 
+	 //Hide the sword
+	 sword.style.display = "none";
+	 
+	 
+	}
+	else if(warriorDmg){
+	
+	explosion.style.display = "block";
+	projectile.style.left =  projectilePosX + "px";
+	projectile.style.top = projectilePosY + "px";
+	
+	//Hide the projectile
+	 projectile.style.display = "none";
+	}
+	
+}
+function clickHandler(){
+	
+	 d1=Math.round(Math.random()*5)+1; 
+	playGame();
+}
+
+
+ 
+function playGame(){ //battlemage
+	
+dl1.innerHTML= d1 +  " Battle mage hits! on odd numbers! ";
+ 
+//if the warrior has been hit
+	if(d1 == 1 || d1 == 3 || d1 == 5 || d1 == 7 || d1 == 9 ){
+	
+	explosion.style.left = warriorSwordX + "px";
+	explosion.style.top = warriorSwordY + "px";
+		explosion.style.display = "block";
+	
+	status.innerHTML=" You rolled "+ d1 +" Battle turn to strike!.";
+		battlemageAttack = true;
+		
+		  warriorHealth -= Math.round(d1*Math.random()*4+2);
+		  warriorState = Math.round(warriorHealth);
+		 warriorState = " Warrior has " + warriorHealth + " remaining.";
+			output.innerHTML =  warriorState ;}else{ clickHandler2();}
+		 
+			
+			
+		 
+		  
+		if(warriorHealth < 1 || battlemageHealth < 1){
+			gameWon = true;
+			endGame();
+		 }
+		
+	}
+	function clickHandler2(){
+
+	d2=Math.round(Math.random()*5)+1;
+	playGame2();
+}
+ 
+function playGame2(){  //warrior
+	
+	dl2.innerHTML= d2 +  " Warrior hits! on even numbers! " ;  		 
+			
+			if(d2 == 2 || d2 == 4 || d2 == 6 || d2 == 8 || d2 == 10 ){
+			
+			explosion.style.left = projectilePosX + "px";
+			explosion.style.top = projectilePosY + "px";
+			explosion.style.display = "block";
+			
+			status.innerHTML=" You rolled " + d2 + ".";
+			
+			warriorDmg = true;
+			
+			battlemageHealth -= Math.round(d2*Math.random()*6+1);
+			battlemageState = Math.round(battlemageHealth) ;
+			battlemageState = " Battle mage has " + battlemageHealth + " remaining.";
+			output2.innerHTML = battlemageState;}else{ clickHandler();}
+			
+		 
+		
+		if (battlemageHealth < 1 || warriorHealth < 1){
+			gameWon = true;
+			endGame();
+		 }
+		 
+		}
+		
+	
+
+//render the new game state
+	render();
+
+function endGame(){
+	if(gameWon){
+	
+	output.innerHTML = "The final Damage! was dealt  " ;
+	if(warriorHealth < 1){
+		output.innerHTML =  "Battle mage is the victor!";
+	}
+	if(battlemageHealth < 1){
+		output2.innerHTML =  " Warrior is the victor!";
+	}
+	
+	
+	
+}
+
+//Disable the button
+	button.removeEventListener("click",clickHandler,false);
+	button.disabled = true;
+	d1 = "gameOver";
+	
+	button2.removeEventListener("click",clickHandler2,false);
+	button2.disabled = true;
+	d2 = "gameOver";
+	
+}
+</script>
+	</html>
