@@ -1,0 +1,106 @@
+#stage
+{
+	width:800px;
+	height:300px;
+	position: relative;
+	
+}
+
+#background
+{
+	width:800px;
+	height: 300px;
+	position: absolute;
+	top:0px;
+	left:0px;
+	background-image: url(../images/background.jpg);
+	
+}
+
+#battlemage
+{
+ width:200px;
+ height:200px;
+ position:absolute;
+ left:50px;
+ top:50px;
+ background-image: url(../images/battlemage.jpg);
+}
+
+#warrior
+{
+	width:200px;
+ height:200px;
+ position:absolute;
+ left:550px;
+ top:50px;
+ background-image: url(../images/warrior.jpg);
+}
+
+#sword
+{
+	width: 20px;
+	height: 50px;
+	position:absolute;
+	top:100px;
+	left:530px;
+	background-image: url(../images/sword.png);
+	display:block;
+}
+
+#projectile
+{
+	width: 20px;
+	height: 20px;
+	position:absolute;
+	top:100px;
+	left:250px;
+	background-image: url(../images/projectile.png);
+	display:block;
+	
+	
+}
+
+#explosion
+{
+width: 20px;
+	height: 20px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	background-image: url(../images/explosion.png);
+	display:none;
+}
+#button
+{
+}
+#button2
+{
+}
+*
+{
+ 
+ font-family: "Arial Black", Gadget, sans-serif;
+}
+
+#game
+{
+
+margin: 0px auto;
+width: 800px;
+height: auto;
+padding: 8px 10px 80px 10px;
+border: DodgerBlue;
+background-color: PaleGoldenRod;
+background: linear-gradient(top, #588063, #fff);
+box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+border-radius: 10px;
+}
+
+#h1
+{
+-webkit-text-stroke: 1px #000;
+-moz-text-stroke: 1px #000;
+text-stroke: 1px #000;
+text-shadow: 1px 3px DodgerBlue;
+}
