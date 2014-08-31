@@ -1,5 +1,5 @@
 <!doctype html>
-<title>Basic sprite</title>
+<title>sprite</title>
 <canvas width="550" height="400" style="border: 1px dashed black"></canvas>
 <button id="up">up</button>
 <button id="down">down</button>
@@ -12,6 +12,7 @@
 <button id="rotateR">rotate right</button>
 <button id="rotateL">rotate left</button>
 <script>
+
 //--- The sprite object
 var spriteObject =
 {
@@ -38,7 +39,7 @@ var sprites = [];
 
 
 
-//Create the cat sprite.
+//Create the sprite.
 //Center it on the canvas and push it into the sprites array
 var earth = Object.create(spriteObject);
 earth.x = 243;
@@ -79,7 +80,7 @@ rotateRight.addEventListener("mousedown", rotateRightHandler,false);
 var rotateLeft = document.querySelector("#rotateL");
 rotateLeft.addEventListener("mousedown",rotateLeftHandler,false);
 
-//Load the cat's image
+//Load the image
 var image = new Image();
 image.addEventListener("load", loadHandler, false);
 image.src = "../images/earthPlanet.png";
