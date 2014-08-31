@@ -1,0 +1,212 @@
+<!doctype html>
+<title>Basic sprite</title>
+<canvas width="550" height="400" style="border: 1px dashed black"></canvas>
+<button id="up">up</button>
+<button id="down">down</button>
+<button id="left">left</button>
+<button id="right">right</button>
+<button id="bigger">bigger</button>
+<button id="smaller">smaller</button>
+<button id="hide">hide</button>
+<button id="show">show</button>
+<button id="rotateR">rotate right</button>
+<button id="rotateL">rotate left</button>
+<script>
+//--- The sprite object
+var spriteObject =
+{
+//The X and Y source position of the sprite's image and its height and width
+sourceX: 0,
+sourceY: 0,
+sourceWidth: 64,
+sourceHeight: 64,
+//The X and Y position of the sprite on the canvas as well as its height
+x: 0,
+y: 0,
+width: 64,
+height: 64,
+
+  visible: true,
+rotation: 0
+};
+//--- The main program
+//the canvas and its drawing surface
+var canvas = document.querySelector("canvas");
+var drawingSurface = canvas.getContext("2d");
+//An array to store the game sprites
+var sprites = [];
+
+
+
+//Create the cat sprite.
+//Center it on the canvas and push it into the sprites array
+var earth = Object.create(spriteObject);
+earth.x = 243;
+earth.y = 168;
+sprites.push(earth);
+
+//Add event listeners to the buttons
+
+//Up button
+var up = document.querySelector("#up");
+up.addEventListener("mousedown", upHandler, false);
+
+var down = document.querySelector("#down");
+down.addEventListener("mousedown", downHandler, false);
+
+var left = document.querySelector("#left");
+left.addEventListener("mousedown", leftHandler, false);
+
+var right = document.querySelector("#right");
+right.addEventListener("mousedown", rightHandler, false);
+
+var show = document.querySelector("#show");
+show.addEventListener("mousedown", showHandler, false);
+
+var hide = document.querySelector("#hide");
+hide.addEventListener("mousedown", hideHandler, false);
+
+var bigger = document.querySelector("#bigger");
+bigger.addEventListener("mousedown", biggerHandler, false);
+
+var smaller = document.querySelector("#smaller");
+smaller.addEventListener("mousedown", smallerHandler, false);
+
+//rotate righ and left event handlers
+var rotateRight = document.querySelector("#rotateR");
+rotateRight.addEventListener("mousedown", rotateRightHandler,false);
+
+var rotateLeft = document.querySelector("#rotateL");
+rotateLeft.addEventListener("mousedown",rotateLeftHandler,false);
+
+//Load the cat's image
+var image = new Image();
+image.addEventListener("load", loadHandler, false);
+image.src = "../images/earthPlanet.png";
+
+
+function loadHandler()
+{
+//Update the sprite as soon as the image has been loaded
+update();
+}
+
+function update()
+{
+//Create the animation loop
+window.requestAnimationFrame(update, canvas);
+
+//Render the animation
+render();
+
+}
+
+//The button eventHandlers
+
+//Up
+function upHandler(event)
+{
+  earth.y -= 10;
+}
+
+//Down
+function downHandler(event)
+{
+  earth.y += 10;
+}
+
+//Right
+function rightHandler(event)
+{
+  earth.x += 10;
+}
+
+//Left
+function leftHandler(event)
+{
+  earth.x -= 10;
+}
+
+//Hide
+function hideHandler(event)
+{
+  earth.visible = false;
+}
+
+//Show
+function showHandler(event)
+{
+  earth.visible = true;
+}
+
+//Bigger
+function biggerHandler(event)
+{
+  earth.height += 10;
+  earth.width += 10;
+  earth.x -= 5;
+  earth.y -= 5;
+}
+
+//Smaller
+function smallerHandler(event)
+{
+  earth.height -= 10;
+  earth.width -= 10;
+  earth.x += 5;
+  earth.y += 5;
+}
+
+//Rotate right
+function rotateRightHandler(event)
+{
+ earth.rotation += 10;
+}
+
+function rotateLeftHandler(event)
+{
+ earth.rotation -= 10;
+}
+
+function render(event)
+{
+//Clear the previous animation frame
+drawingSurface.clearRect(0, 0, canvas.width, canvas.height);
+//Loop through all the sprites in the "sprites" array and use their properties to display them
+if(sprites.length !== 0)
+{
+for(var i = 0; i < sprites.length; i++)
+{
+var sprite = sprites[i];
+
+ if(sprite.visible)
+ {
+  //Save the current state of the drawing surface before it is rotated
+  drawingSurface.save();
+
+//Rotate the canvas
+drawingSurface.translate
+(
+Math.floor(sprite.x +(sprite.width/2)),
+Math.floor(sprite.y + (sprite.width/2))
+);
+
+drawingSurface.rotate(sprite.rotation*Math.PI/180);  
+
+drawingSurface.drawImage
+(
+image,
+sprite.sourceX, sprite.sourceY,
+sprite.sourceWidth, sprite.sourceHeight,
+Math.floor(-sprite.width / 2), Math.floor(-sprite.height/2),
+sprite.width, sprite.height
+);
+
+//restore the drawing surface to it's state before it was rotated
+drawingSurface.restore();
+}
+}
+}
+}
+</script>
+</html>
