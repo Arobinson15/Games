@@ -1,0 +1,61 @@
+//================================================================================//
+//guessing game c++ 
+
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+
+using namespace std;
+
+int main()
+{
+
+
+//declare system time variable
+time_t cpuNumber;
+
+//Get value from system clock 
+time(&cpuNumber);
+
+//Convert seconds to a unsigned integer.
+srand((unsigned int) cpuNumber);
+
+cpuNumber = rand()% 100 + 1;
+
+ int userNumber;
+ int totalGuess = 0;
+ int GuessLeft = 10;
+
+
+do{
+
+    cout << "Guess a number from 1 - 100 " << endl;
+    cin >> userNumber ;
+	totalGuess++;
+
+if(totalGuess == GuessLeft)
+    {
+         cout << "Game Over!" << endl;
+ break;
+    }
+ else if(userNumber > cpuNumber)
+ {
+  cout << "Too high ! " << endl;
+ }
+
+  else if(userNumber < cpuNumber)
+  {
+    cout << "Too low !" << endl;
+  }
+
+  else if(userNumber == cpuNumber)
+  {
+    cout << "That's it! You guessed it in " <<  totalGuess << " tries!" << endl;
+     break;
+  }
+
+ }while(userNumber != cpuNumber);
+
+   return 0;
+ }
+//============================================= end ===================================//
