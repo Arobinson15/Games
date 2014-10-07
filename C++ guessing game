@@ -1,5 +1,5 @@
 //c++ guessing game
-//If the program is given a char main will return 0 and prompt to close the console.
+//If the program is given a char for userNumber main will return 0 and prompt to close the console.
 //===================================================================================
 
 
