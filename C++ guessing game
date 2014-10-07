@@ -1,61 +1,107 @@
-//================================================================================//
-//guessing game c++ 
+//c++ guessing game
+//If the program is given a char main will return 0 and prompt to close the console.
+//===================================================================================
+
 
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+
 
 using namespace std;
 
 int main()
 {
 
+//srand(static_cast<unsigned int>(time(0))); //seed random number generator and casts current time into unsigned int
+//and time in seconds.
 
-//declare system time variable
+//Declare variable to hold seconds on clock.
 time_t cpuNumber;
 
-//Get value from system clock 
+//Get value from system clock and
+//place in seconds variable.
 time(&cpuNumber);
 
 //Convert seconds to a unsigned integer.
 srand((unsigned int) cpuNumber);
-
 cpuNumber = rand()% 100 + 1;
 
  int userNumber;
  int totalGuess = 0;
  int GuessLeft = 10;
-
+ char again;
 
 do{
 
+    label:
+        if(
+        totalGuess > GuessLeft )
+         totalGuess = 0;
+          else if(cpuNumber) {
     cout << "Guess a number from 1 - 100 " << endl;
     cin >> userNumber ;
-	totalGuess++;
+    ++totalGuess;}
 
-if(totalGuess == GuessLeft)
+
+if(totalGuess == GuessLeft )
     {
          cout << "Game Over!" << endl;
+		 do
+	{
+
+		cout << "\n**Do you want to play again? (y/n): ";
+		cin >> again;
+		 if(again == 'y')
+		 goto label;
+		  else if(again == !'y')
+             break;
+          else
+             cout << "Unknown error.." << " Press any button to close .." << endl;
+           break;
+	} while (again == 'y');
+
+	cout << "\nThank you...";
  break;
     }
- else if(userNumber > cpuNumber)
+ else if(userNumber > cpuNumber )
  {
   cout << "Too high ! " << endl;
  }
 
-  else if(userNumber < cpuNumber)
+  else if(userNumber < cpuNumber )
   {
     cout << "Too low !" << endl;
+
   }
 
   else if(userNumber == cpuNumber)
   {
     cout << "That's it! You guessed it in " <<  totalGuess << " tries!" << endl;
-     break;
+         do
+	{
+	     char again;
+
+		cout << "\n**Do you want to play again? (y/n): ";
+		cin >> again;
+		 if(again == 'y')
+             goto label;
+         else if(again == !'y')
+             break;
+             else
+             cout << "Unknown error.." << " Press any button to close .." << endl;
+           break;
+	} while (again == 'y');
+
+	cout << "\nThank you...";
+
+
   }
 
  }while(userNumber != cpuNumber);
 
+
+
    return 0;
  }
-//============================================= end ===================================//
+//============================================================ end  ========================================================//
